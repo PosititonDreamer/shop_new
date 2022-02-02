@@ -1,0 +1,115 @@
+$color: #FF6969;
+$title: #fff;
+$opacity: 0.7;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
+.header {
+  display: flex;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  &__right {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.logo {
+  width: 5.42vw;
+  height: 2.12vh;
+  padding: 1.75vh 1.6vw 1.75vh 1.5vw;
+  align-items: center;
+  background: $color;
+  display: flex;
+
+  &__image {
+    width: 2vw;
+    height: 3.1vh;
+    margin-right: 0.36vw;
+  }
+
+  &__title {
+    font-family: 'Roboto', sans-serif;
+    color: $title;
+    font-size: 1.85vh;
+    line-height: 2.1vh;
+    font-weight: 700;
+
+  }
+
+}
+
+.menu {
+
+  &__list {
+    display: flex;
+    height: 2.13vh;
+  }
+
+  &__item {
+    margin: 1.75vh 1.04vw;
+    height: 2.77vh;
+    align-items: center;
+
+  }
+
+  &__link {
+    color: #424242;
+    font-size: 1.66vh;
+    line-height: 1.95vh;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    padding-bottom: 1vh;
+  }
+
+  &__link:hover {
+    border-bottom: 0.37vh solid rgba($color, $opacity);
+    transition: .1s;
+  }
+}
+
+.router-link-active {
+  border-bottom: 0.37vh solid $color;
+}
+
+.router-link-active:hover {
+  border-bottom: 0.37vh solid $color;
+}
+.cart {
+  align-items: center;
+  padding: 1.4vh 1.56vw;
+  position: relative;
+  height: 100%;
+  border: none;
+  background: none;
+  align-items: center;
+  cursor: pointer;
+  &__image {
+    width: 1.1vw;
+  }
+  &__length {
+    width: 1.66vh;
+    padding: 0.231vh 0;
+    border-radius: 50%;
+    background: #FF6969;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1vh;
+    line-height: 1.2vh;
+    position: absolute;
+    text-align: center;
+    align-items: center;
+    top: 0.9vh;
+    right: 1.3vw;
+    color: white;
+  }
+}
+.openCart {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  height: 100%;
+  width: 100%;
+}

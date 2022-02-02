@@ -1,0 +1,103 @@
+$color: #FF6969;
+$opacity: 0.7;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap');
+.products {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background: #F8F8F8;
+
+  &__item {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    width: 18.4vw;
+    height: 39.7vh;
+    margin-top: 5.2vh;
+    margin-left: 1.82vw;
+  }
+  &__image {
+    width: 18.38vw;
+    height: 22.7vh;
+    border: 1px solid #E6E6E6;
+    box-sizing: border-box;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  &__item-description {
+    padding: 2vh 1.56vw;
+  }
+
+  &__name, &__price, &__button {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2vh;
+    line-height: 1.8vh;
+    color: #424242;
+  }
+
+  &__name {
+    font-weight: 500;
+    cursor: pointer;
+    &:hover {
+      transition: 0.2s;
+      color: rgba($color, $opacity);
+    }
+  }
+
+  &__price {
+    margin-top: 1vh;
+    font-weight: 700;
+  }
+
+  &__button {
+    font-weight: 400;
+    color: #fff;
+    border: none;
+    background: $color;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    padding: 0.65vh 1vw;
+    margin-top: 3.14vh;
+    align-items: center;
+    height: 3.7vh;
+    cursor: pointer;
+    &-image {
+      width: 0.94vw;
+      margin-left: 0.52vw;
+    }
+    &:hover {
+      background: rgba($color, $opacity);
+      transition: .2s;
+    }
+  }
+  &__empty {
+    margin: 0 auto;
+    text-align: center;
+    height: 18.5vh;
+    display: block;
+    &-image {
+      margin-top: 36.03vh;
+      margin-bottom: 2.4vh;
+      align-items: center;
+      height: 9.17vh;
+    }
+    &-text { align-items: center;
+      font-family: 'Roboto', sans-serif;
+      font-size: 2.2vh;
+      line-height: 2.6vh;
+      color: #424242;
+      font-weight: 700;
+    }
+  }
+  &__open {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    height: 100%;
+    width: 100%;
+  }
+}
