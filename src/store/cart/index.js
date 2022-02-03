@@ -9,12 +9,12 @@ export default {
             state.cart = id
         },
         addCart(state, id) {
-            state.cart[id.id] = id
-            localStorage.setItem('Catalog', JSON.stringify(state.cart))
+            state.cart.push(id)
+            localStorage.setItem('Cart', JSON.stringify(state.cart))
         },
         removeCart(state,id) {
-            delete state.cart[id.id]
-            localStorage.setItem('Catalog', JSON.stringify(state.cart))
+            state.cart = state.cart.filter(el=>el.id != id.id)
+            localStorage.setItem('Cart', JSON.stringify(state.cart))
         },
         sendOrder(state, data) {
             if(localStorage.getItem('orders')) {
@@ -33,7 +33,7 @@ export default {
     },
     actions: {
         fetchCart(ctx) {
-            if(localStorage.getItem('Catalog')) ctx.commit('updateCart', JSON.parse(localStorage.getItem('Catalog')))
+            if(localStorage.getItem('Cart')) ctx.commit('updateCart', JSON.parse(localStorage.getItem('Cart')))
             else {
                 ctx.commit('updateCart', [])
             }

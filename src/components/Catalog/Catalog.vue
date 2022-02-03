@@ -34,8 +34,7 @@ export default {
     },
     async updateCategory(id){
       this.Loader = true
-      this.childrenArray = await this.children[this.id]
-      this.idCategory = await this.children[this.id][0]['id']
+      this.childrenArray = await this.children.filter(el=>el.parent_id == this.id)
       this.Loader= false
     },
   },
@@ -44,13 +43,17 @@ export default {
 
   },
   watch:{
-    id(){
-      this.updateCategory(this.id)
+    async id(){
+      this.Loader = true
+      this.childrenArray = await this.children.filter(el=>el.parent_id == this.id)
+      this.idCategory = this.childrenArray[0].id
+      this.Loader= false
     }
   },
   async mounted() {
-    this.childrenArray = await this.children[this.id]
-    this.idCategory = await this.children[this.id][0]['id']
+
+    this.childrenArray = await this.children.filter(el=>el.parent_id == this.id)
+    this.idCategory = this.childrenArray[0].id
     this.Loader= false
   },
   components: {

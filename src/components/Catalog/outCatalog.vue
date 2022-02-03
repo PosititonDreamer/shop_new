@@ -1,7 +1,7 @@
 <template>
   <div class="products">
     <Loader v-if="Loader"/>
-    <div v-else-if="catalog[this.id].length" class="products__item" v-for="item in catalog[this.id]" >
+    <div v-else-if="catalogArray.length" class="products__item" v-for="item in catalogArray" >
       <img :src="item.img" alt="" class="products__image" @click="openProduct(item)">
       <div class="products__item-description">
         <p class="products__name" @click="openProduct(item)">{{ item.name }}</p>
@@ -32,7 +32,8 @@ export default {
   data() {
     return {
       Loader: true,
-      product: 0
+      product: 0,
+      catalogArray: []
     }
   },
   methods: {
@@ -47,6 +48,7 @@ export default {
       this.fetchCart()
     },
     addCarts(id) {
+      console.log(id)
       id.completed = !id.completed
       this.addCart(id)
       this.fetchCart()
@@ -61,13 +63,14 @@ export default {
   computed: mapGetters(['catalog']),
   watch: {
     async id() {
-      if (this.Loader) this.Loader = true
       this.product = 0
+      if (!this.Loader) this.Loader = true
+      this.catalogArray = await this.catalog.filter(el=>el.parent_id == this.id)
       if (this.Loader) this.Loader = false
     },
   },
   async mounted() {
-    this.fetchCart()
+    this.catalogArray = await this.catalog.filter(el=>el.parent_id == this.id)
     if (0 < parseInt(this.id)) {
       this.Loader = false
     }
