@@ -27,12 +27,12 @@
       }
     },
     computed: mapGetters(['parent']),
-    async mounted() {
-      await this.fetchData()
+    mounted() {
+      this.fetchData()
       if(this.$route.path === '/') {
         this.$router.push({path: '/CurrentCategory/'+ this.parent[0]['id']})
       }
-      await this.fetchCart()
+      this.fetchCart()
       this.Loader = false
     },
     components: {
@@ -42,12 +42,4 @@
   }
 </script>
 
-<style lang="scss">
-* {
-  padding: 0;
-  margin: 0;
-  text-decoration: none;
-  list-style-type: none;
-}
-
-</style>
+<style lang="scss" src="./assets/style/main.scss" />

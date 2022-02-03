@@ -7,7 +7,7 @@
     <div class="header__right">
       <nav class="menu">
         <ul class="menu__list">
-          <li v-for="item in parent" class="menu__item">
+          <li v-for="item in parent" :key="item.id" class="menu__item">
             <router-link :to="{path: '/CurrentCategory/'+item.id, props:{id: item.id}}" tag="a" class="menu__link">
               {{ item.name }}
             </router-link>

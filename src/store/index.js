@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import cart from './cart/'
-import product from "@/components/Catalog/product";
 
 Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     parent: [],
     children: [],
-    catalog: []
+    catalog: [],
+    reviews: []
   },
   mutations: {
     async upadteData(state, allData) {
@@ -26,6 +26,13 @@ export default new Vuex.Store({
             allData.forEach(data => {
                 if(children.id == data.parent_id) {
                     catalog.push(data)
+                }
+            })
+        })
+        await state.reviews.forEach(review=> {
+            state.catalog.forEach(product=> {
+                if(review.id == product.id) {
+                    product.reviews.push(review)
                 }
             })
         })
@@ -52,14 +59,9 @@ export default new Vuex.Store({
         state.children = childrens
         state.catalog = catalog
     },
-    updateParent(state, data) {
-      state.parent = data
-    },
-    updateChildren(state, data) {
-      state.children = data
-    },
-    updateCatalog(state, data) {
-      state.catalog = data
+    async addReview(state, review) {
+        const product = state.catalog.filter(el=>el.id==review.id)
+        state.reviews.push(review)
     }
   },
   actions: {
@@ -71,7 +73,7 @@ export default new Vuex.Store({
         ctx.commit('upadteData', allData)
         },
       addReview(ctx, data) {
-          
+          ctx.commit('addReview', data)
       }
   },
   getters: {

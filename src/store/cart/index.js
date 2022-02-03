@@ -1,5 +1,3 @@
-import catalog from "@/components/Catalog/Catalog";
-
 export default {
     state: {
         cart: []

@@ -15,17 +15,18 @@
           <li @click="openTab(2)" class="tabs__list-button" :class="{'tabs__list-active': tab === 2}">Отзывы</li>
           <li @click="openTab(3)" class="tabs__list-button" :class="{'tabs__list-active': tab === 3}">Оставить отзыв</li>
         </ul>
+        <tabs :id="tab"/>
         <div class="tabs__item" v-if="tab == 0">
           <p class="tabs__item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias deleniti dolor doloribus facere, impedit in iste iure mollitia nam nemo odio perferendis qui quibusdam quod recusandae sequi ullam velit voluptas.</p>
         </div>
         <div class="tabs__item" v-else-if="tab == 1">
-           <p v-for="prop in product.props"  class="tabs__item-props">
+           <p v-for="prop in product.props" :key="prop.id" class="tabs__item-props">
              <span class="tabs__item-prop">{{prop.caption}}</span>
              <span class="tabs__item-prop">{{prop.value}} {{prop.measure}}</span>
            </p>
         </div>
         <div class="tabs__item" v-else-if="tab == 2">
-          <div class="review" v-for="item in product.reviews">
+          <div class="review" v-for="item in product.reviews" :key="item.id">
 <!--            {{item}}-->
             <img :src="item.avatar" alt="" class="review__avatar">
             <div class="review__props">
@@ -46,16 +47,17 @@
           <form class="form" @submit.prevent="acceptReview">
             <p class="form__text">Оценка</p>
             <div class="form__rate">
-              <button type="button" v-for="n in 5" @click="takeRate(n)" class="form__button">
-                <img v-if="n <= rate" src="../../assets/gold_star.png" alt="" class="form__button-image">
+              <button type="button"  v-for="n in 5" @click="takeRate(n)" class="form__button">
+                <img v-if="n <= formData.rate" src="../../assets/gold_star.png" alt="" class="form__button-image">
                 <img v-else src="../../assets/star.png" alt="" class="form__button-image">
               </button>
             </div>
             <p class="form__text">Имя</p>
-            <input type="text" class="form__input" v-model="author">
+            <input type="text" class="form__input" v-model="formData.author">
             <p class="form__text">Отзыв</p>
-            <textarea class="form__textarea" v-model="text"></textarea>
-            <button class="form__button-review">Отправить отзыв</button>
+            <textarea class="form__textarea" v-model="formData.text"></textarea>
+            <button v-if="buttonSubmit" class="form__button-review">Отправить отзыв</button>
+            <button type="button" disabled v-else class="form__button-review form__button-disabled">...</button>
           </form>
         </div>
       </div>
@@ -64,6 +66,7 @@
 </template>
 <script>
 import {mapActions} from "vuex";
+import tabs from './tabs'
 export default {
     props: {
       product:[]
@@ -71,9 +74,12 @@ export default {
     data() {
       return {
         tab: 0,
-        rate: 0,
-        text: '',
-        author: ''
+        buttonSubmit: true,
+        formData: {
+          rate: 0,
+          text: '',
+          author: ''
+        }
       }
     },
 
@@ -83,25 +89,26 @@ export default {
         this.tab = number
       },
       takeRate(number) {
-        this.rate = number
+        this.formData.rate = number
       },
-      acceptReview() {
-        var data = []
-        data['text'] = this.text
-        data['rate'] = this.rate
-        data['author'] = this.author
-        data['id'] = this.product['id']
-        this.addReview(data)
-        this.rate = 0
-        this.text = ''
-        this.author = ''
-        this.product['reviews'].push(data)
+      async acceptReview() {
+        this.buttonSubmit = false
+        this.formData['id'] = this.product['id']
+        await this.addReview(this.formData)
+        this.formData.rate = 0
+        this.formData.text = ''
+        this.formData.author = ''
+        await this.product['reviews'].push(this.formData)
+        this.buttonSubmit = true
       }
     },
   watch: {
       product() {
-        console.log(this.product)
+
       }
+  },
+  components: {
+      tabs
   }
 
   }

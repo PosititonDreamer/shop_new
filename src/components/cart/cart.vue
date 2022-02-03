@@ -9,7 +9,7 @@
       <div class="order" v-if="!access && cartLength > 0">
         <p class="cart__text">В корзине: </p>
         <div class="cart__products">
-          <div class="cart__products-item" v-if="cartLength > 0" v-for="item in cart" >
+          <div class="cart__products-item" v-if="cartLength > 0" v-for="item in cart" :key="item.id" >
             <img :src="item.img" alt="" class="cart__products-image">
             <div class="cart__products-description">
               <p class="cart__products-name">{{ item.name }}</p>
@@ -61,7 +61,6 @@ import {TheMask} from 'vue-the-mask'
 export default {
   data() {
     return {
-      developmnet: true,
       number: '',
       name: '',
       adress: '',
@@ -103,22 +102,22 @@ export default {
     }
   },
   watch: {
-    number() {
-      if (this.number.toString().trim().length == 0 || this.number.toString().length != 10) {
+    number(value, oldvalue) {
+      if (value.toString().trim().length == 0 || value.toString().length != 10) {
         this.number_check = true
       } else {
         this.number_check = false
       }
     },
-    adress() {
-      if (this.adress.toString().trim().length == 0) {
+    adress(value, oldvalue) {
+      if (value.toString().trim().length == 0) {
         this.adress_check = true
       } else {
         this.adress_check = false
       }
     },
-    name() {
-      if (this.name.toString().trim().length == 0) {
+    name(value, oldvalue) {
+      if (value.toString().trim().length == 0) {
         this.name_check = true
       } else {
         this.name_check = false
