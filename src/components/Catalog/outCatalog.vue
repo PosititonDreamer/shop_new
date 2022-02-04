@@ -18,7 +18,7 @@
     <product-open
         v-if="product !=0"
         :product="product"
-        v-on:closeProduct="closeProduct"
+        @closeProduct="closeProduct"
     />
   </div>
 </template>

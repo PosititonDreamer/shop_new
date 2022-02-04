@@ -28,12 +28,14 @@
     },
     computed: mapGetters(['parent']),
     mounted() {
-      this.fetchData()
-      if(this.$route.path === '/') {
-        this.$router.push({path: '/CurrentCategory/'+ this.parent[0]['id']})
-      }
-      this.fetchCart()
-      this.Loader = false
+      this.fetchData().then(()=>{
+        if(this.$route.path === '/') {
+          this.$router.push({path: '/CurrentCategory/'+ this.parent[0]['id']})
+        }
+        this.fetchCart()
+        this.Loader = false
+      })
+
     },
     components: {
       CurrentHeader,

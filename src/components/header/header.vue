@@ -20,7 +20,7 @@
       </button>
     </div>
     <cart v-if="open"
-          v-on:takeCart="takeCart"
+          @takeCart="takeCart"
     />
   </header>
 </template>
