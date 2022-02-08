@@ -14,24 +14,24 @@ $opacity: 0.7;
 }
 
 .logo {
-  width: 5.42vw;
-  height: 2.12vh;
-  padding: 1.75vh 1.6vw 1.75vh 1.5vw;
+  width: 103px;
+  height: 39px;
+  padding: 14px 33px 13px 29px;
   align-items: center;
   background: $color;
   display: flex;
 
   &__image {
-    width: 2vw;
-    height: 3.1vh;
-    margin-right: 0.36vw;
+    width: 39px;
+    height: 33px;
+    margin-right: 7px;
   }
 
   &__title {
     font-family: 'Roboto', sans-serif;
     color: $title;
-    font-size: 1.85vh;
-    line-height: 2.1vh;
+    font-size: 20px;
+    line-height: 23px;
     font-weight: 700;
 
   }
@@ -42,41 +42,40 @@ $opacity: 0.7;
 
   &__list {
     display: flex;
-    height: 2.13vh;
+    height: 100%;
   }
 
   &__item {
-    margin: 1.75vh 1.04vw;
-    height: 2.77vh;
+    margin: 21px 20px;
+    height: 10px;
     align-items: center;
 
   }
 
   &__link {
     color: #424242;
-    font-size: 1.66vh;
-    line-height: 1.95vh;
+    font-size: 18px;
+    line-height: 21px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    padding-bottom: 1vh;
+    padding-bottom: 20.5px;
   }
 
   &__link:hover {
-    border-bottom: 0.37vh solid rgba($color, $opacity);
+    border-bottom: 3px solid rgba($color, $opacity);
     transition: .1s;
   }
 }
 
 .router-link-active {
-  border-bottom: 0.37vh solid $color;
-}
-
-.router-link-active:hover {
-  border-bottom: 0.37vh solid $color;
+  border-bottom: 3px solid $color;
+  &:hover {
+    border-bottom: 3px solid $color;
+  }
 }
 .cart {
   align-items: center;
-  padding: 1.4vh 1.56vw;
+  padding: 19px 29px;
   position: relative;
   height: 100%;
   border: none;
@@ -84,22 +83,24 @@ $opacity: 0.7;
   align-items: center;
   cursor: pointer;
   &__image {
-    width: 1.1vw;
+    width: 21px;
+    height: 21px;
   }
   &__length {
-    width: 1.66vh;
-    padding: 0.231vh 0;
+    width: 18px;
+    height: 15px;
+    padding-top: 3px;
     border-radius: 50%;
     background: #FF6969;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    font-size: 1vh;
-    line-height: 1.2vh;
+    font-size: 11px;
+    line-height: 13px;
     position: absolute;
     text-align: center;
     align-items: center;
-    top: 0.9vh;
-    right: 1.3vw;
+    top: 12px;
+    right: 23px;
     color: white;
   }
 }
@@ -110,6 +111,7 @@ $opacity: 0.7;
   left: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.2);
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
+  overflow-y: auto;
 }

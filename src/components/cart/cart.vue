@@ -3,44 +3,76 @@
     <div class="cart">
       <div class="cart__item">
         <p class="cart__item-info">Оформить заказ</p>
-        <button class="cart__item-button" @click="$emit('takeCart')"><img src="../../assets/close.png" alt=""
-                                                                          class="cart__item-close"></button>
+        <v-button
+            :class="'cart__item-button'"
+            @click="$emit('takeCart')"
+        >
+          <img src="../../assets/close.png" alt="" class="cart__item-close">
+        </v-button>
       </div>
       <div class="order" v-if="!access && cartLength > 0">
         <p class="cart__text">В корзине: </p>
         <div class="cart__products">
-          <div class="cart__products-item" v-if="cartLength > 0" v-for="item in cart" :key="item.id" >
+          <div class="cart__products-item" v-if="cartLength > 0" v-for="item in cart" :key="item.id">
             <img :src="item.img" alt="" class="cart__products-image">
             <div class="cart__products-description">
               <p class="cart__products-name">{{ item.name }}</p>
               <p class="cart__products-price">{{ item.price }} ₽</p>
-              <button class="cart__products-button" @click="removeCarts(item)"> Убрать из корзины</button>
+              <v-button
+                  :class="'cart__products-button'"
+                  :name="'Убрать из корзины'"
+                  @click="removeCarts(item)"
+              />
             </div>
           </div>
         </div>
-        <form class="cart__form" @submit.prevent="send_form">
+        <v-form
+            :class="'cart__form'"
+            @click="send_form"
+        >
           <div class="cart__form-blocks">
             <div class="cart__form-block">
               <p class="cart__form-text">Имя</p>
-              <input type="text" v-model="name" class="cart__form-input" :class="{'cart__form-error': this.name_check}">
-              <p class="error" :class="{'error-view': this.name_check}">Имя не должно быть пустым</p>
-              <p></p>
+              <v-input
+                  :type="'text'"
+                  :class="['cart__form-input',{'cart__form-error cart__form-input': this.name_check,}]"
+                  v-model="name"
+              />
+              <v-error
+                  :name="'Имя не должно быть пустым'"
+                  :class="['error', {'error-view': this.name_check}]"
+              />
             </div>
             <div class="cart__form-block">
               <p class="cart__form-text">Телефон</p>
-              <the-mask :mask="['+7 (###) ##-##-###']" v-model="number" class="cart__form-input"
-                        :class="{'cart__form-error': this.number_check}"/>
-              <p class="error" :class="{'error-view': this.number_check}">Телефон должен быть полным</p>
+              <the-mask
+                  :mask="['+7 (###) ##-##-###']"
+                  v-model="number"
+                  :class="['cart__form-input', {'cart__form-error': this.number_check}]"
+              />
+              <v-error
+                  :name="'Телефон должен быть полным'"
+                  :class="['error', {'error-view': this.number_check}]"
+              />
             </div>
           </div>
           <div class="cart__form-block">
             <p class="cart__form-text">Полный адрес</p>
-            <input type="text" v-model="adress" class="cart__form-input cart__form-adress"
-                   :class="{'cart__form-error': this.adress_check}">
-            <p class="error" :class="{'error-view': this.adress_check}">Адрес не должен быть пустым</p>
+            <v-input
+                :type="'text'"
+                :class="['cart__form-input cart__form-adress', {'cart__form-error': this.adress_check,}]"
+                v-model="adress"
+            />
+            <v-error
+                :name="'Адрес не должен быть пустым'"
+                :class="['error', {'error-view': this.adress_check}]"
+            />
           </div>
-          <button type="submit" class="cart__form-button">Заказать</button>
-        </form>
+          <v-button
+              :class="'cart__form-button'"
+              :name="'Заказать'"
+          />
+        </v-form>
       </div>
       <div class="cart__access" v-else-if="access">
         <img src="../../assets/accept_dart.png" alt="" class="cart__access-image">
@@ -57,6 +89,10 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import {TheMask} from 'vue-the-mask'
+import vButton from '@/components/elements/button'
+import vInput from '@/components/elements/input'
+import vError from "@/components/elements/error"
+import vForm from "@/components/elements/form"
 
 export default {
   data() {
@@ -81,10 +117,11 @@ export default {
     }),
     removeCarts(id) {
       this.removeCart(id)
-      this.fetchCart()
-      this.fetchData()
+      this.fetchData().then(() => {
+        this.fetchCart()
+      })
     },
-    async send_form() {
+    send_form() {
       if (
           this.number.toString().trim().length != 0 || this.number.toString().length == 10 &&
           this.adress.toString().trim().length != 0 &&
@@ -94,10 +131,13 @@ export default {
         this.sendOrder(data)
         this.access = true
         this.number = ''
-        this.name= ''
+        this.name = ''
         this.adress = ''
-        await this.fetchCart()
-        await this.fetchData()
+        this.fetchCart().then(() => {
+          this.fetchData()
+        })
+
+
       }
     }
   },
@@ -125,7 +165,7 @@ export default {
     }
   },
   components: {
-    TheMask
+    TheMask, vButton, vInput, vError, vForm
   }
 }
 </script>

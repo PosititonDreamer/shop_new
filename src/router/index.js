@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import store from '@/store'
 import VueRouter from 'vue-router'
-import Catalog from "@/components/Catalog/Catalog";
+import Catalog from "@/components/Catalog/main";
 
 Vue.use(VueRouter)
 export default new VueRouter({

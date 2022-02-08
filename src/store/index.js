@@ -74,8 +74,7 @@ export default new Vuex.Store({
             ctx.commit('upadteData', allData)
         },
         addReview(ctx, data) {
-            console.log(data)
-           ctx.commit('addReview', data)
+            ctx.commit('addReview', data)
         }
     },
     getters: {

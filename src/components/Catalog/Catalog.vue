@@ -1,58 +1,84 @@
 <template>
-  <div class="Catalog">
-    <Loader  v-if="Loader"/>
-    <nav class="sidebar" v-else-if="childrenArray.length" >
-      <ul class="sidebar__list">
-        <li v-for="item in childrenArray" :key="item.id" class="sidebar__item">
-          <button @click="takeCategory(item.id)" v-if="item.id === idCategory" class="sidebar__button sidebar__button-active">{{item.name}}</button>
-          <button v-else @click="takeCategory(item.id)" class="sidebar__button">{{item.name}}</button>
+  <div class="products">
+    <Loader v-if="Loader && catalogArray.length == 0"/>
+    <out-product
+        v-else-if="catalogArray.length"
+        v-for="item in catalogArray"
+        :key="item.id"
+        :item="item"
+        @add-carts="addCarts(item)"
+        @remove-carts="removeCarts(item)"
+        @open-product="openProduct(item)"
+    />
 
-        </li>
-      </ul>
-    </nav>
-    <out-catalog :id="idCategory" v-if="childrenArray.length" />
+    <div class="products__empty" v-else>
+      <img src="../../assets/cart.png" alt="" class="products__empty-image">
+      <p class="products__empty-text">В данной категории товаров пока нет</p>
+    </div>
+    <product-open
+        v-if="product !=0"
+        :product="product"
+        @closeProduct="closeProduct"
+    />
   </div>
 </template>
 <script>
-import {mapGetters} from "vuex"
+import {mapGetters, mapActions} from 'vuex'
 import Loader from '@/components/Loader/Loader'
-import outCatalog from '@/components/Catalog/outCatalog'
+import productOpen from '@/components/Catalog/product'
+import vButton from '@/components/elements/button'
+import OutProduct from "@/components/Catalog/outProduct";
 
 export default {
+  props: ['id'],
   data() {
     return {
       Loader: true,
-      idCategory: 0,
-      childrenArray: []
+      product: 0,
+      catalogArray: [],
     }
   },
-
-  props: ['id'],
   methods: {
-    takeCategory(id) {
-      this.idCategory = id;
+    ...mapActions({
+      addCart: 'addCart',
+      removeCart: 'removeCart',
+      fetchCart: 'fetchCart'
+    }),
+    removeCarts(id) {
+      id.completed = !id.completed
+      this.removeCart(id)
+      this.fetchCart()
+    },
+    addCarts(id) {
+      id.completed = !id.completed
+      this.addCart(id)
+      this.fetchCart()
+    },
+    openProduct(id) {
+      this.product = id
+    },
+    closeProduct() {
+      this.product = 0
     }
   },
-  computed: {
-    ...mapGetters(['children']),
-
-  },
-  watch:{
-    async id(){
-      this.Loader = true
-      this.childrenArray = await this.children.filter(el=>el.parent_id == this.id)
-      this.idCategory = this.childrenArray[0].id
-      this.Loader= false
-    }
+  computed: mapGetters(['catalog']),
+  watch: {
+    async id() {
+      this.product = 0
+      if (!this.Loader) this.Loader = true
+      this.catalogArray = []
+      this.catalogArray = await this.catalog.filter(el => el.parent_id == this.id)
+      if (this.Loader) this.Loader = false
+    },
   },
   async mounted() {
-    this.childrenArray = await this.children.filter(el=>el.parent_id == this.id)
-    this.idCategory = this.childrenArray[0].id
-    this.Loader= false
+    this.catalogArray = await this.catalog.filter(el => el.parent_id == this.id)
+    this.Loader = false
   },
   components: {
-    Loader, outCatalog
-  },
+    OutProduct,
+    Loader, productOpen, vButton
+  }
 }
 </script>
-<style lang="scss" src="./style/sidebar.scss" scoped />
+<style lang="scss" src="./style/catalog.scss"/>

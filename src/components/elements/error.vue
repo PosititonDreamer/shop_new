@@ -1,11 +1,8 @@
 <template>
-  <tab>
-
-  </tab>
+  <p>{{name}}</p>
 </template>
-
 <script>
 export default {
-  props: ['id']
+  props: ['name']
 }
 </script>

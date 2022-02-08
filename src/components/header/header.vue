@@ -14,10 +14,13 @@
           </li>
         </ul>
       </nav>
-      <button class="cart" @click="takeCart()">
+      <v-button
+          :class="'cart'"
+          @click="takeCart()"
+      >
         <img src="../../assets/cart.png" alt="" class="cart__image">
         <p class="cart__length">{{ cartLength }}</p>
-      </button>
+      </v-button>
     </div>
     <cart v-if="open"
           @takeCart="takeCart"
@@ -27,8 +30,10 @@
 <script>
 import {mapGetters} from "vuex"
 import cart from "@/components/cart/cart"
+import vButton from "@/components/elements/button"
+
 export default {
-  data () {
+  data() {
     return {
       open: false,
     }
@@ -40,7 +45,7 @@ export default {
     }
   },
   components: {
-    cart
+    cart, vButton
   }
 }
 </script>

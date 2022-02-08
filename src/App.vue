@@ -20,11 +20,6 @@
     },
     methods: {
       ...mapActions([ 'fetchData', 'fetchCart']),
-      async acceptReview() {
-        this.Loader = true
-        await this.fetchData()
-        this.Loader = false
-      }
     },
     computed: mapGetters(['parent']),
     mounted() {

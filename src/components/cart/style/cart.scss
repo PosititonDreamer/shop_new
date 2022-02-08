@@ -2,23 +2,21 @@ $color: #FF6969;
 $opacity: 0.7;
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap');
 .cart {
-  padding: 2.7vh 1.56vw ;
-  width: 29.4vw;
-  height: 100%;
+  padding: 32px 30px ;
+  width: 573px;
+  min-height: 100%;
   background: #FFFFFF;
-  position: fixed;
+  position: absolute;
   right: 0;
-  overflow-y: auto;
-  overflow-x: auto;
   &__text {
     font-weight: 700;
-    margin-top: 2.4vh;
-    margin-bottom: 2.4vh;
+    margin-top: 25px;
+    margin-bottom: 28px;
   }
   &__item, &__text {
     font-family: 'Roboto', sans-serif;
-    font-size: 2vh;
-    line-height: 1.8vh;
+    font-size: 18px;
+    line-height: 21px;
     color: #424242;
   }
   &__item {
@@ -26,8 +24,8 @@ $opacity: 0.7;
     justify-content: space-between;
     font-weight: 700;
     &-button {
-      width: 1vw;
-      height: 2vh;
+      width: 20px;
+      height: 20px;
       background: none;
       border: none;
       cursor: pointer;
@@ -39,31 +37,31 @@ $opacity: 0.7;
   }
 
   &__products {
-    height: 39vh;
+    height: 390px;
     overflow-y: auto;
-
+    margin-bottom: 40px;
     &-item {
       display: flex;
-      margin-bottom: 4vh;
-      height: 9vh;
+      margin-bottom: 43px;
+      height: 97px;
       font-family: 'Roboto', sans-serif;
-      font-size: 2vh;
-      line-height: 1.8vh;
+      font-size: 18px;
+      line-height: 21px;
       color: #424242;
       align-items: center;
     }
     &-image {
-      width: 7.18vw;
-      height: 9vh;
-      margin-right: 1.14vw;
+      width: 138px;
+      height: 97px;
+      margin-right: 22px;
     }
     &-name {
       font-weight: 500;
-      margin-bottom: 0.7vh;
+      margin-bottom: 7px;
     }
     &-price {
       font-weight: 700;
-      margin-bottom: 0.7vh;
+      margin-bottom: 7px;
     }
     &-button {
       background: none;
@@ -72,8 +70,8 @@ $opacity: 0.7;
       cursor: pointer;
       transition: .2s;
       font-family: 'Roboto', sans-serif;
-      font-size: 1.8vh;
-      line-height: 1.6vh;
+      font-size: 14px;
+      line-height: 16px;
       &:hover {
         color: rgba($color, $opacity)
       }
@@ -85,53 +83,53 @@ $opacity: 0.7;
       display: flex;
     }
     &-block {
-      margin-right: 1.1vw;
-      margin-bottom: 1.5vh;
-      margin-bottom: 1.5vh;
+      margin-right: 23px;
+      margin-bottom: 20px;
     }
     &-text {
       font-family: 'Roboto', sans-serif;
-      font-size: 1.8vh;
-      line-height: 1.6vh;
+      font-size: 16px;
+      line-height: 19px;
       color: black;
       font-weight: 400;
-      margin-bottom: 1.1vh;
+      margin-bottom: 11px;
     }
     &-input {
-      width: 14.1vw;
-      height: 4vh;
-      padding: 1vh 0.8vw;
+      width: 259px;
+      height: 40px;
+      padding: 12px 14px;
       background: #FFFFFF;
       border: 1px solid #898989;
       box-sizing: border-box;
       border-radius: 5px;
       font-family: 'Roboto', sans-serif;
-      font-size: 1.8vh;
-      line-height: 1.6vh;
+      font-size: 16px;
+      line-height: 19px;
       color: black;
       font-weight: 400;
       outline: none;
     }
     &-adress {
-      width: 29.25vw;
+      width: 544px;
     }
     &-error {
       border: 1px solid #FF6969;
     }
     &-button {
-      font-size: 1.8vh;
-      line-height: 1.8vh;
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 21px;
       font-weight: 400;
       color: #fff;
       border: none;
       background: $color;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
       border-radius: 5px;
-      padding: .7vh 1vw;
+      padding: 7px 19px;
       align-items: center;
-      height: 4vh;
+      height: 40px;
       cursor: pointer;
-      width: 12vw;
+      width: 190px;
       &:hover {
         background: rgba($color, $opacity);
         transition: .2s;
@@ -139,36 +137,34 @@ $opacity: 0.7;
     }
   }
   &__access, &__empty {
-    margin-top: 20vh;
+    margin-top: 200px;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    font-size: 2.2vh;
-    line-height: 2.6vh;
+    font-size: 24px;
+    line-height: 28px;
     font-weight: 700;
     color: #424242;
     &-text {
-      margin-top: 2vh;
+      margin-top: 21px;
     }
   }
   &__access {
     &-image {
-      width: 7.3vw;
-      height: 10vh ;
+      width: 140px;
+      height: 109px ;
     }
   }
   &__empty {
     &-image {
-      width: 5.15vw;
-      height: 9.17vh;
+      width: 99px;
+      height: 99px;
     }
   }
 }
 .error {
-  font-size: 1.1vh;
-  line-height: 1.6vh;
   font-family: 'Roboto', sans-serif;
-  font-size: 1.8vh;
-  line-height: 1.6vh;
+  font-size: 14px;
+  line-height: 16px;
   color: black;
   font-weight: 400;
   color: $color;
