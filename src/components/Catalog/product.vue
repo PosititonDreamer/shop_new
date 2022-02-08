@@ -39,10 +39,15 @@
           >
             <p class="form__text">Оценка</p>
             <div class="form__rate">
-              <button type="button" v-for="n in 5" @click="takeRate(n)" class="form__button">
+              <v-button
+                  v-for="n in 5"
+                  :class="'form__button'"
+                :type="'button'"
+                @click="takeRate(n)"
+              >
                 <img v-if="n <= formData.rate" src="../../assets/gold_star.png" alt="" class="form__button-image">
                 <img v-else src="../../assets/star.png" alt="" class="form__button-image">
-              </button>
+              </v-button>
             </div>
             <p class="form__text">Имя</p>
             <v-input
